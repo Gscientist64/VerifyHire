@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FaShieldAlt, FaStar, FaMapMarkerAlt, FaIndustry, FaBriefcase, FaArrowLeft, FaCheckCircle, FaExclamationTriangle, FaClock } from 'react-icons/fa';
-import Navbar from '../components/Navbar.jsx';
+import Navbar from '../Components/Navbar.jsx';
 import { companiesApi, jobsApi } from '../services/api.js';
 
 /** Converts markdown-style rich text (## headers, bullet points, **bold**) to HTML */

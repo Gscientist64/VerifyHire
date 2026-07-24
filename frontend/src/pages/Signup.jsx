@@ -14,13 +14,13 @@ import {
   FaSearch,
   FaArrowLeft,
 } from 'react-icons/fa';
-import AuthLayout from '../components/AuthLayout.jsx';
-import InputField from '../components/InputField.jsx';
-import PasswordInput from '../components/PasswordInput.jsx';
-import GoogleButton from '../components/GoogleButton.jsx';
-import PrimaryButton from '../components/PrimaryButton.jsx';
-import Divider from '../components/Divider.jsx';
-import ValidationError from '../components/ValidationError.jsx';
+import AuthLayout from '../Components/AuthLayout.jsx';
+import InputField from '../Components/InputField.jsx';
+import PasswordInput from '../Components/PasswordInput.jsx';
+import GoogleButton from '../Components/GoogleButton.jsx';
+import PrimaryButton from '../Components/PrimaryButton.jsx';
+import Divider from '../Components/Divider.jsx';
+import ValidationError from '../Components/ValidationError.jsx';
 import { signupSchema } from '../validation/authSchemas.js';
 import {
   signUpWithEmail,

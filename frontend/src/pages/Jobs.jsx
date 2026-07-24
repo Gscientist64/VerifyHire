@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
-import Navbar from '../components/Navbar.jsx';
-import JHero from '../components/JHero.jsx';
-import SearchBar from '../components/SearchBar.jsx';
-import JobCard from '../components/JobCard.jsx';
-import ReportModal from '../components/ReportModal.jsx';
+import Navbar from '../Components/Navbar.jsx';
+import JHero from '../Components/JHero.jsx';
+import SearchBar from '../Components/SearchBar.jsx';
+import JobCard from '../Components/JobCard.jsx';
+import ReportModal from '../Components/ReportModal.jsx';
 import { jobsApi } from '../services/api.js';
 import { useAuth } from '../hooks/useAuth.js';
 import { ROUTES } from '../utils/constants.js';
