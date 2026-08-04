@@ -199,6 +199,29 @@ function Signup({ initialRole = 'user' }) {
                   />
                 </>
               )}
+
+              {isEmployer && (
+                <>
+                  <div className="grid grid-cols-2 gap-3">
+                    <InputField
+                      name="fullName"
+                      type="text"
+                      label="Your full name"
+                      placeholder="Jane Doe"
+                      icon={<FaUser size={14} />}
+                      autoComplete="name"
+                    />
+                    <InputField
+                      name="email"
+                      type="email"
+                      label="Login email"
+                      placeholder="you@example.com"
+                      icon={<FaEnvelope size={14} />}
+                      autoComplete="email"
+                    />
+                  </div>
+                </>
+              )}
               <div className={isEmployer ? 'grid grid-cols-2 gap-3' : ''}>
                 <PasswordInput
                   name="password"

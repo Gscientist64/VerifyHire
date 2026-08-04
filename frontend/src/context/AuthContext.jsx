@@ -22,7 +22,6 @@ export function AuthProvider({ children }) {
   }, []);
 
   // In development, all signed-in users are considered email-verified.
-  // Remove this once email verification is fully integrated.
   const isEmailVerified = !!user;
 
   const value = useMemo(

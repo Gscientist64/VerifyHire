@@ -8,11 +8,7 @@ import {
 import { auth, googleProvider } from "../firebase/firebase.js";
 import api from "./api.js";
 
-/**
- * Maps raw Firebase Auth error codes to friendly, user-facing copy.
- * Firebase throws error.code values like "auth/popup-closed-by-user" —
- * we translate the ones relevant to this flow and fall back to a generic message.
- */
+
 export function getAuthErrorMessage(error) {
   const code = error?.code || "";
 

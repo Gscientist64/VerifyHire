@@ -15,9 +15,6 @@ function VerifyEmail() {
   const navigate = useNavigate();
   const { user, markEmailVerified } = useAuth();
 
-  // The email is handed off via router state from the Signup page. If it's
-  // missing (e.g. the user landed here directly), fall back to the signed-in
-  // user's email, or send them back to sign up.
   const email = location.state?.email || user?.email || "";
   const [devCode, setDevCode] = useState(location.state?.devCode || "");
 
