@@ -1,14 +1,17 @@
-import { Link } from "react-router-dom";
-import { FaShieldAlt, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+import {
+  FaShieldAlt,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from 'react-icons/fa';
 
 export default function Footer() {
   return (
     <footer className="bg-white border-t border-gray-100 py-10">
       <div className="max-w-6xl mx-auto px-6">
-
         {/* Top grid */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-10">
-
           {/* Brand */}
           <div className="sm:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-3 w-fit">
@@ -36,17 +39,26 @@ export default function Footer() {
             <h4 className="text-[#1a1a2e] font-bold text-sm mb-4">Explore</h4>
             <ul className="flex flex-col gap-3">
               <li>
-                <Link to="/" className="text-gray-600 text-sm hover:text-orange-500 transition-colors">
+                <Link
+                  to="/"
+                  className="text-gray-600 text-sm hover:text-orange-500 transition-colors"
+                >
                   Why VerifyHire
                 </Link>
               </li>
               <li>
-                <Link to="/" className="text-gray-600 text-sm hover:text-orange-500 transition-colors">
+                <Link
+                  to="/"
+                  className="text-gray-600 text-sm hover:text-orange-500 transition-colors"
+                >
                   How it works?
                 </Link>
               </li>
               <li>
-                <Link to="/login" className="text-gray-500 text-sm hover:text-orange-500 transition-colors">
+                <Link
+                  to="/login"
+                  className="text-gray-500 text-sm hover:text-orange-500 transition-colors"
+                >
                   Log in
                 </Link>
               </li>
@@ -71,6 +83,18 @@ export default function Footer() {
                 >
                   support@verifyhire.com
                 </a>
+                <Link
+                  to="/PrivacyPolicy"
+                  className="text-gray-500 text-sm hover:text-orange-500 transition-colors"
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  to="/TermsAndConditions"
+                  className="text-gray-500 text-sm hover:text-orange-500 transition-colors"
+                >
+                  Terms and Conditions
+                </Link>
               </div>
             </div>
 
@@ -108,16 +132,14 @@ export default function Footer() {
               </div>
             </div>
           </div>
-
         </div>
 
         {/* Bottom copyright */}
         <div className="mt-10 pt-6 border-t border-gray-100 text-center">
-            <p className="text-gray-500 text-sm">
+          <p className="text-gray-500 text-sm">
             © 2026 VerifyHire. All rights reserved.
           </p>
         </div>
-
       </div>
     </footer>
   );

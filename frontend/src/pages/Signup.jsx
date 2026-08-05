@@ -53,7 +53,9 @@ function Signup({ initialRole = 'user' }) {
 
     setCacVerifying(true);
     try {
-      const response = await authApi.verifyCAC({ cac_number: cacNumber.trim() });
+      const response = await authApi.verifyCAC({
+        cac_number: cacNumber.trim(),
+      });
       const data = response.data;
       if (data.is_valid) {
         setCacCompanyName(data.company_name);
@@ -62,7 +64,10 @@ function Signup({ initialRole = 'user' }) {
       }
     } catch (err) {
       const detail = err.response?.data?.detail;
-      setCacError(detail || 'CAC verification failed. Please check the number and try again.');
+      setCacError(
+        detail ||
+          'CAC verification failed. Please check the number and try again.',
+      );
       setCacVerified(false);
     } finally {
       setCacVerifying(false);
@@ -176,7 +181,9 @@ function Signup({ initialRole = 'user' }) {
                 >
                   <FaArrowLeft size={14} />
                 </Link>
-                <span className="text-sm text-gray-500">Back to account type</span>
+                <span className="text-sm text-gray-500">
+                  Back to account type
+                </span>
               </div>
 
               {!isEmployer && (
@@ -248,7 +255,10 @@ function Signup({ initialRole = 'user' }) {
                     </label>
                     <div className="flex gap-2">
                       <div className="relative flex-1">
-                        <FaIdCard size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                        <FaIdCard
+                          size={14}
+                          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                        />
                         <input
                           type="text"
                           name="cacNumber"
@@ -262,14 +272,20 @@ function Signup({ initialRole = 'user' }) {
                           placeholder="e.g. RC123456"
                           disabled={values.noCac}
                           className={`w-full rounded-xl border py-2.5 pl-9 pr-4 text-sm focus-ring ${
-                            cacVerified ? 'border-green-300 bg-green-50' : 'border-gray-300'
+                            cacVerified
+                              ? 'border-green-300 bg-green-50'
+                              : 'border-gray-300'
                           } ${values.noCac ? 'bg-gray-100 text-gray-400' : ''}`}
                         />
                       </div>
                       <button
                         type="button"
-                        onClick={() => handleVerifyCAC(values.cacNumber, setFieldValue)}
-                        disabled={cacVerifying || !values.cacNumber || values.noCac}
+                        onClick={() =>
+                          handleVerifyCAC(values.cacNumber, setFieldValue)
+                        }
+                        disabled={
+                          cacVerifying || !values.cacNumber || values.noCac
+                        }
                         className="flex items-center gap-1.5 rounded-xl bg-blue-600 px-3 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 disabled:bg-blue-300 transition-colors shrink-0"
                       >
                         {cacVerifying ? (
@@ -356,10 +372,10 @@ function Signup({ initialRole = 'user' }) {
                 <span className="text-sm text-gray-600">
                   I agree to the{' '}
                   <Link
-                    to="#"
-                    className="font-medium text-brand-600 hover:text-brand-700"
+                    to="/TermsAndConditions"
+                    className="text-blue-600 text-sm hover:text-orange-500 transition-colors"
                   >
-                    Terms &amp; Conditions
+                    Terms and Conditions
                   </Link>
                 </span>
               </label>

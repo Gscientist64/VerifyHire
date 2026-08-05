@@ -1,14 +1,22 @@
 import { Link } from 'react-router-dom';
 import { FaShieldAlt, FaSearch, FaArrowRight } from 'react-icons/fa';
+import heroCards from '../assets/hero-cards.png';
+import heroCircle from '../assets/hero-circle.png';
 
 const Hero = () => {
   return (
     <section className="bg-gradient-to-r from-slate-700 via-slate-800 to-slate-950 min-h-[85vh] flex items-center">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-        <div className="max-w-2xl">
+      <div className="max-w-7xl lg:flex mx-auto px-6 lg:px-8 w-full">
+        <div className=" flex-1 max-w-2xl">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-slate-600/50 text-gray-200 px-4 py-2 rounded-full text-sm mb-8" role="status">
-            <FaShieldAlt className="text-orange-400 text-xs" aria-hidden="true" />
+          <div
+            className="inline-flex items-center gap-2 bg-slate-600/50 text-gray-200 px-4 py-2 rounded-full text-sm mb-8"
+            role="status"
+          >
+            <FaShieldAlt
+              className="text-orange-400 text-xs"
+              aria-hidden="true"
+            />
             <span>Apply with confidence</span>
           </div>
 
@@ -45,7 +53,37 @@ const Hero = () => {
             </Link>
           </div>
         </div>
+
+        <div className="flex-1 flex items-center justify-center gap-4 relative  ">
+          <img
+            src={heroCards}
+            alt="Hero Cards"
+            className=" w-[200px] md:w-[350px] lg:w-[400px] z-10"
+          />
+
+          <img
+            src={heroCircle}
+            alt="Hero Circle"
+            className="absolute -right-10 top-0 w-[250px] md:w-[300px] lg:w-[350px] opacity-80 -z-10"
+            aria-hidden="true"
+          />
+        </div>
       </div>
+
+      {/* <div className="relative hidden lg:flex justify-center">
+        <img
+          src={heroCards}
+          alt="Hero Cards"
+          className="absolute right-50 top-1/2 -translate-y-1/2 w-[50%] max-w-[600px]"
+        />
+
+        <img
+          src={heroCircle}
+          alt=""
+          aria-hidden="true"
+          className="absolute top-1/2 -translate-y-1/2 -right-48 w-[500px] opacity-90"
+        />
+      </div> */}
     </section>
   );
 };

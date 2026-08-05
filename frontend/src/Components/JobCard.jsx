@@ -1,4 +1,11 @@
-import { FaBuilding, FaMapMarkerAlt, FaCheckCircle, FaExclamationTriangle, FaFlag, FaChevronRight } from "react-icons/fa";
+import {
+  FaBuilding,
+  FaMapMarkerAlt,
+  FaCheckCircle,
+  FaExclamationTriangle,
+  FaFlag,
+  FaChevronRight,
+} from 'react-icons/fa';
 
 function StatusBadge({ verified }) {
   if (verified) {
@@ -17,7 +24,7 @@ function StatusBadge({ verified }) {
   );
 }
 
-function JobCard({ job, onViewCompany, onReport }) {
+function JobCard({ job, onViewCompany, onApply, onReport }) {
   return (
     <article className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
       <div className="flex items-start justify-between gap-3">
@@ -48,6 +55,13 @@ function JobCard({ job, onViewCompany, onReport }) {
         >
           View company
           <FaChevronRight size={11} />
+        </button>
+
+        <button
+          onClick={() => onApply(job)}
+          className="rounded-lg bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-700 transition-colors"
+        >
+          Apply
         </button>
         <button
           type="button"
