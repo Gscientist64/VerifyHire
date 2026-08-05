@@ -6,6 +6,8 @@ import Signup from '../pages/Signup.jsx';
 import VerifyEmail from '../pages/VerifyEmail.jsx';
 import Jobs from '../pages/Jobs.jsx';
 import CompanyDetail from '../pages/CompanyDetail.jsx';
+import PrivacyPolicy from '../pages/PrivacyPolicy.jsx';
+import TermsAndConditions from '../pages/TermsAndConditions.jsx';
 import Dashboard from '../pages/Dashboard.jsx';
 import AdminDashboard from '../pages/AdminDashboard.jsx';
 import RecruiterDashboard from '../pages/RecruiterDashboard.jsx';
@@ -18,8 +20,7 @@ import { ROUTES } from '../utils/constants.js';
 function PublicOnlyRoute({ children }) {
   const { user, loading, isEmailVerified } = useAuth();
   if (loading) return null;
-  if (user && isEmailVerified)
-    return <Navigate to={ROUTES.JOBS} replace />;
+  if (user && isEmailVerified) return <Navigate to={ROUTES.JOBS} replace />;
   return children;
 }
 
@@ -31,6 +32,8 @@ function AppRoutes() {
 
       <Route path={ROUTES.JOBS} element={<Jobs />} />
       <Route path="/company/:id" element={<CompanyDetail />} />
+      <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+      <Route path="/TermsAndConditions" element={<TermsAndConditions />} />
 
       <Route
         path={ROUTES.LOGIN}
