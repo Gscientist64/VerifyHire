@@ -42,6 +42,8 @@ function Jobs() {
         location: job.location || '',
         type: job.job_type || '',
         description: job.description || '',
+        salary: job.salary || '',
+        applyUrl: job.apply_url || '',
         verified: job.company?.verified || false,
       }));
       setAllJobs(mapped);

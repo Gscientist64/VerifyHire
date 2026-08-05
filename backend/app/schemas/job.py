@@ -11,6 +11,8 @@ class JobBase(BaseModel):
     location: Optional[str] = None
     job_type: Optional[JobType] = None
     description: Optional[str] = None
+    salary: Optional[str] = None
+    apply_url: Optional[str] = None
 
 
 class JobCreate(JobBase):
@@ -22,6 +24,8 @@ class JobUpdate(BaseModel):
     location: Optional[str] = None
     job_type: Optional[JobType] = None
     description: Optional[str] = None
+    salary: Optional[str] = None
+    apply_url: Optional[str] = None
 
 
 class JobResponse(JobBase):
