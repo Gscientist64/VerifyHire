@@ -1,13 +1,90 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.security import HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.security import verify_password, get_password_hash, create_access_token
+from app.core.dependencies import security
+from app.core.firebase_auth import verify_firebase_token
 from app.models.user import User, UserRole
-from app.schemas.user import UserCreate, RecruiterCreate, UserLogin, TokenResponse, UserResponse, CACVerifyRequest
+from app.schemas.user import (
+    UserCreate, RecruiterCreate, UserLogin, TokenResponse, UserResponse,
+    CACVerifyRequest, FirebaseRegisterRequest,
+)
 from app.core.config import settings
 from app.services.cac import verify_cac_number
+from uuid import uuid4
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
+
+
+@router.post("/register/firebase", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
+def register_firebase_user(
+    data: FirebaseRegisterRequest,
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+    db: Session = Depends(get_db),
+):
+    """
+    Register or update a Firebase-authenticated user with a role.
+
+    Reads the Firebase ID token from the Authorization header, extracts the
+    user's email, and creates/updates their record with the given role
+    ('user' or 'recruiter').
+    """
+    if not credentials:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authenticated",
+        )
+
+    # Verify the Firebase ID token
+    firebase_user = verify_firebase_token(credentials.credentials)
+    if not firebase_user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid Firebase token",
+        )
+
+    email = firebase_user.get("email", "")
+    if not email:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Firebase token has no email",
+        )
+
+    # Validate role
+    if data.role not in ("user", "recruiter"):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Role must be 'user' or 'recruiter'",
+        )
+
+    # Find or create the user
+    user = db.query(User).filter(User.email == email).first()
+    if not user:
+        user = User(
+            identifier=uuid4(),
+            full_name=data.full_name or email.split("@")[0],
+            email=email,
+            hashed_password="",  # Firebase handles password
+            role=UserRole(data.role),
+            is_active=True,
+            company_name=data.company_name,
+            cac_number=data.cac_number.upper().strip() if data.cac_number else None,
+        )
+        db.add(user)
+    else:
+        # Update role/company if provided (don't downgrade admin)
+        if user.role != UserRole.ADMIN:
+            user.role = UserRole(data.role)
+        if data.company_name:
+            user.company_name = data.company_name
+        if data.cac_number:
+            user.cac_number = data.cac_number.upper().strip()
+
+    db.commit()
+    db.refresh(user)
+
+    return user
 
 
 @router.post("/register", response_model=TokenResponse, status_code=status.HTTP_201_CREATED)

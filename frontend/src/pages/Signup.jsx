@@ -74,6 +74,20 @@ function Signup({ initialRole = 'user' }) {
     try {
       await signUpWithEmail(values);
 
+      // Register the user's role with the backend so they get the right dashboard
+      try {
+        const isEmployerRole = values.role === 'employer';
+        await authApi.registerFirebase({
+          full_name: values.fullName,
+          role: isEmployerRole ? 'recruiter' : 'user',
+          company_name: isEmployerRole ? values.companyName || undefined : undefined,
+          cac_number: isEmployerRole ? values.cacNumber || undefined : undefined,
+        });
+      } catch (registerError) {
+        // Non-blocking — the user can still be auto-created later as a regular user
+        console.log('Role registration skipped:', registerError.message);
+      }
+
       let devCode = '';
       let warning = '';
       try {

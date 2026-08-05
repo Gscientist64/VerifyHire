@@ -56,6 +56,7 @@ export const authApi = {
   verifyCode: (email, code) => api.post("/auth/verify-code", { email, code }),
   resendCode: (email) => api.post("/auth/resend-code", { email }),
   verifyCAC: (data) => api.post("/auth/verify-cac", data),
+  registerFirebase: (data) => api.post("/auth/register/firebase", data),
 };
 
 // ── Users ──
