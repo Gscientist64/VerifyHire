@@ -49,26 +49,6 @@ function JobCard({ job, onViewCompany, onReport }) {
       </div>
 
       <div className="mt-4 flex items-center gap-2">
-        {hasApplyUrl ? (
-          <a
-            href={job.applyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-orange-600 focus-ring"
-          >
-            Apply now
-            <FaExternalLinkAlt size={11} />
-          </a>
-        ) : (
-          <button
-            type="button"
-            onClick={() => onViewCompany?.(job)}
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-orange-600 focus-ring"
-          >
-            View company
-            <FaChevronRight size={11} />
-          </button>
-        )}
         <button
           type="button"
           onClick={() => onViewCompany?.(job)}
@@ -76,6 +56,26 @@ function JobCard({ job, onViewCompany, onReport }) {
         >
           Company
         </button>
+        {hasApplyUrl ? (
+          <a
+            href={job.applyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus-ring"
+          >
+            Apply now
+            <FaExternalLinkAlt size={10} />
+          </a>
+        ) : (
+          <button
+            type="button"
+            onClick={() => onViewCompany?.(job)}
+            className="flex items-center justify-center gap-1 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus-ring"
+          >
+            View company
+            <FaChevronRight size={10} />
+          </button>
+        )}
         <button
           type="button"
           onClick={() => onReport?.(job)}
