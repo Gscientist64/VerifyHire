@@ -13,6 +13,23 @@ import { signInWithEmail, signInWithGoogle, getAuthErrorMessage } from "../servi
 import { usersApi } from "../services/api.js";
 import { ROUTES } from "../utils/constants.js";
 
+/**
+ * Pick the right landing page for an authenticated user based on their role.
+ * Returns null for regular job seekers (falls through to /jobs).
+ */
+function getDashboardFor(me) {
+  const role = me?.data?.role;
+  if (role === "admin") return ROUTES.ADMIN;
+  if (role === "recruiter") return ROUTES.RECRUITER_DASHBOARD;
+  // Users who registered with a company are employers — send them to the
+  // recruiter dashboard even if their role flag is stale (role registration
+  // can be skipped if the registerFirebase call failed during signup).
+  if (role === "user" && me.data.company_name) {
+    return ROUTES.RECRUITER_DASHBOARD;
+  }
+  return null;
+}
+
 function Login() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,12 +45,9 @@ function Login() {
       // Redirect based on role
       try {
         const me = await usersApi.getMe();
-        if (me.data.role === "admin") {
-          navigate(ROUTES.ADMIN, { replace: true });
-          return;
-        }
-        if (me.data.role === "recruiter") {
-          navigate(ROUTES.RECRUITER_DASHBOARD, { replace: true });
+        const dest = getDashboardFor(me);
+        if (dest) {
+          navigate(dest, { replace: true });
           return;
         }
       } catch {}
@@ -52,12 +66,9 @@ function Login() {
       await signInWithGoogle();
       try {
         const me = await usersApi.getMe();
-        if (me.data.role === "admin") {
-          navigate(ROUTES.ADMIN, { replace: true });
-          return;
-        }
-        if (me.data.role === "recruiter") {
-          navigate(ROUTES.RECRUITER_DASHBOARD, { replace: true });
+        const dest = getDashboardFor(me);
+        if (dest) {
+          navigate(dest, { replace: true });
           return;
         }
       } catch {}
