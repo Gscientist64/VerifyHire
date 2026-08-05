@@ -48,7 +48,7 @@ function JobCard({ job, onViewCompany, onReport }) {
         )}
       </div>
 
-      <div className="mt-4 flex items-center gap-2">
+      <div className="mt-4 flex items-center gap-3">
         <button
           type="button"
           onClick={() => onViewCompany?.(job)}
@@ -61,7 +61,7 @@ function JobCard({ job, onViewCompany, onReport }) {
             href={job.applyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1 rounded-lg bg-orange-500 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600 focus-ring"
+            className="flex items-center justify-center gap-1 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus-ring"
           >
             Apply now
             <FaExternalLinkAlt size={10} />
@@ -70,7 +70,7 @@ function JobCard({ job, onViewCompany, onReport }) {
           <button
             type="button"
             onClick={() => onViewCompany?.(job)}
-            className="flex items-center justify-center gap-1 rounded-lg bg-orange-500 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-600 focus-ring"
+            className="flex items-center justify-center gap-1 rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus-ring"
           >
             View company
             <FaChevronRight size={10} />
