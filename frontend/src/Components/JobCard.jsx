@@ -71,7 +71,7 @@ function JobCard({ job, onViewCompany, onReport }) {
             href={job.applyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg bg-[#0F172A] px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-700 transition-colors"
+            className=" inline-flex items-center gap-1.5 rounded-lg bg-[#0F172A] px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-300 transition-colors"
           >
             Apply now
             <FaExternalLinkAlt size={10} />
