@@ -3,14 +3,17 @@ export default function TermsAndConditions() {
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-slate-950">
       <section className="bg-gradient-to-r from-slate-700 via-slate-800 to-slate-950 text-white">
-        <div className="max-w-5xl mx-auto px-6 py-16">
-          <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center">
-            <FaShieldAlt className="text-white text-lg" />
+        <div className="max-w-5xl mx-auto px-6 py-10">
+          <div className="lg:inline-flex flex items-buttom gap-2">
+            <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center">
+              <FaShieldAlt className="text-white text-lg" />
+            </div>
+            <h1 className="mb-10 text-3xl font-bold">
+              <span className="text-white">Verify</span>
+              <span className="text-orange-500">Hire</span>
+            </h1>
           </div>
-          <h1 className="mb-10 text-2xl font-bold">
-            <span className="text-white">Verify</span>
-            <span className="text-orange-500">Hire</span>
-          </h1>
+          <br />
           <span className="bg-white/20 px-4 py-1 rounded-full text-sm">
             Legal
           </span>

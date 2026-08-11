@@ -4,21 +4,24 @@ export default function PrivacyPolicy() {
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-slate-950">
       <section className="border-b bg-gradient-to-r from-slate-700 via-slate-800 to-slate-950 text-white">
-        <div className="max-w-5xl mx-auto px-6 py-16">
-          <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center">
-            <FaShieldAlt className="text-white text-lg" />
+        <div className="max-w-5xl mx-auto px-6 py-10">
+          <div className="lg:inline-flex flex items-buttom gap-2">
+            <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center">
+              <FaShieldAlt className="text-white text-lg" />
+            </div>
+            <h1 className="mb-10 text-3xl font-bold">
+              <span className="text-white">Verify</span>
+              <span className="text-orange-500">Hire</span>
+            </h1>
           </div>
-          <h1 className="mb-10 text-2xl font-bold">
-            <span className="text-white">Verify</span>
-            <span className="text-orange-500">Hire</span>
-          </h1>
-          <span className="inline-block rounded-full bg-white/20 px-4 py-1 text-sm">
+          <br />
+          <span className="inline-block rounded-full bg-white/20 px-3 py-1 text-sm">
             Legal
           </span>
           <h1 className="text-4xl md:text-5xl font-bold mt-4">
             Privacy Policy
           </h1>
-          <p className="mt-4 text-blue-100 max-w-3xl">
+          <p className="mt-1 text-blue-100 max-w-3xl">
             Last updated: 23 July 2026
           </p>
         </div>

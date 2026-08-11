@@ -41,6 +41,8 @@ function Signup({ initialRole = 'user' }) {
   const [cacCompanyName, setCacCompanyName] = useState('');
   const cacFieldRef = useRef(null);
 
+  const isEmployerSignup = initialRole === 'employer';
+
   async function handleVerifyCAC(cacNumber, setFieldValue) {
     setCacError('');
     setCacVerified(false);
@@ -161,8 +163,12 @@ function Signup({ initialRole = 'user' }) {
         </>
       }
     >
-      <GoogleButton onClick={handleGoogleSignIn} loading={googleLoading} />
-      <Divider />
+      {!isEmployerSignup && (
+        <>
+          <GoogleButton onClick={handleGoogleSignIn} loading={googleLoading} />
+          <Divider />
+        </>
+      )}
 
       {formError && (
         <div
