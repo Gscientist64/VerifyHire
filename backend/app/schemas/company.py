@@ -10,6 +10,7 @@ class CompanyBase(BaseModel):
     location: Optional[str] = None
     industry: Optional[str] = None
     about: Optional[str] = None
+    website: Optional[str] = None
 
 
 class CompanyCreate(CompanyBase):

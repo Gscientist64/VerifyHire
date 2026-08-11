@@ -26,6 +26,8 @@ class Job(BaseModel):
     location = Column(String(200), nullable=True)
     job_type = Column(Enum(JobType), nullable=True)
     description = Column(Text, nullable=True)
+    salary = Column(String(200), nullable=True)
+    apply_url = Column(Text, nullable=True)
     
     # Relationships
     company = relationship("Company", backref="jobs")

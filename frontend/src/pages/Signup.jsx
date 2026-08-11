@@ -81,6 +81,34 @@ function Signup({ initialRole = 'user' }) {
     try {
       await signUpWithEmail(values);
 
+      // Register the user's role with the backend so they get the right
+      // dashboard. Retry once — a hiccup here would otherwise leave the user
+      // with a plain "user" role and route them to the wrong dashboard.
+      let registerError = null;
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          const isEmployerRole = values.role === 'employer';
+          await authApi.registerFirebase({
+            full_name: values.fullName,
+            role: isEmployerRole ? 'recruiter' : 'user',
+            company_name: isEmployerRole ? values.companyName || undefined : undefined,
+            cac_number: isEmployerRole ? values.cacNumber || undefined : undefined,
+          });
+          registerError = null;
+          break;
+        } catch (err) {
+          registerError = err;
+          if (attempt === 0) {
+            // Brief pause so the Firebase token is definitely minted.
+            await new Promise((r) => setTimeout(r, 800));
+          }
+        }
+      }
+      if (registerError) {
+        // Non-blocking — the user can still be auto-created later as a regular user
+        console.log('Role registration skipped:', registerError.message);
+      }
+
       let devCode = '';
       let warning = '';
       try {

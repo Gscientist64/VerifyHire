@@ -10,6 +10,7 @@ class Company(BaseModel):
     location = Column(String(200), nullable=True)
     industry = Column(String(100), nullable=True)
     about = Column(Text, nullable=True)
+    website = Column(String(500), nullable=True)
     verified = Column(Boolean, default=False, nullable=False)
     
     def __repr__(self):

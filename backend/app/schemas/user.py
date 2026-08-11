@@ -48,6 +48,14 @@ class CACVerifyRequest(BaseModel):
     cac_number: str = Field(..., min_length=5, max_length=50)
 
 
+class FirebaseRegisterRequest(BaseModel):
+    """Register a Firebase-authenticated user with a role."""
+    full_name: str = Field(..., min_length=2, max_length=100)
+    role: str = Field(..., description="'user' or 'recruiter'")
+    company_name: Optional[str] = None
+    cac_number: Optional[str] = None
+
+
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"

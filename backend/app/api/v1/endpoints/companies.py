@@ -51,6 +51,70 @@ def get_companies(
     return companies
 
 
+# ── RECRUITER ENDPOINTS ──────────────────────────────────────────────
+
+
+@router.get("/my", response_model=CompanyResponse)
+def get_my_company(
+    current_user: User = Depends(get_current_recruiter),
+    db: Session = Depends(get_db)
+):
+    """
+    Get the company associated with the current recruiter. (Recruiter/Admin only)
+    """
+    if not current_user.company_name:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No company associated with your account"
+        )
+    
+    company = db.query(Company).filter(
+        Company.name == current_user.company_name
+    ).first()
+    
+    if not company:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Company not found"
+        )
+    
+    return company
+
+
+@router.patch("/my", response_model=CompanyResponse)
+def update_my_company(
+    company_data: CompanyUpdate,
+    current_user: User = Depends(get_current_recruiter),
+    db: Session = Depends(get_db)
+):
+    """
+    Update the recruiter's company profile. (Recruiter/Admin only)
+    """
+    if not current_user.company_name:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No company associated with your account"
+        )
+    
+    company = db.query(Company).filter(
+        Company.name == current_user.company_name
+    ).first()
+    
+    if not company:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Company not found"
+        )
+    
+    for field, value in company_data.model_dump(exclude_unset=True).items():
+        setattr(company, field, value)
+    
+    db.commit()
+    db.refresh(company)
+    
+    return company
+
+
 @router.get("/{company_id}", response_model=CompanyResponse)
 def get_company(
     company_id: UUID,
@@ -237,67 +301,3 @@ def delete_company(
     db.commit()
     
     return {"message": "Company deleted successfully"}
-
-
-# ── RECRUITER ENDPOINTS ──────────────────────────────────────────────
-
-
-@router.get("/my", response_model=CompanyResponse)
-def get_my_company(
-    current_user: User = Depends(get_current_recruiter),
-    db: Session = Depends(get_db)
-):
-    """
-    Get the company associated with the current recruiter. (Recruiter/Admin only)
-    """
-    if not current_user.company_name:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="No company associated with your account"
-        )
-    
-    company = db.query(Company).filter(
-        Company.name == current_user.company_name
-    ).first()
-    
-    if not company:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Company not found"
-        )
-    
-    return company
-
-
-@router.patch("/my", response_model=CompanyResponse)
-def update_my_company(
-    company_data: CompanyUpdate,
-    current_user: User = Depends(get_current_recruiter),
-    db: Session = Depends(get_db)
-):
-    """
-    Update the recruiter's company profile. (Recruiter/Admin only)
-    """
-    if not current_user.company_name:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="No company associated with your account"
-        )
-    
-    company = db.query(Company).filter(
-        Company.name == current_user.company_name
-    ).first()
-    
-    if not company:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Company not found"
-        )
-    
-    for field, value in company_data.model_dump(exclude_unset=True).items():
-        setattr(company, field, value)
-    
-    db.commit()
-    db.refresh(company)
-    
-    return company
