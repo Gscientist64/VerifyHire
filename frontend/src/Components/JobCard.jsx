@@ -1,4 +1,13 @@
-import { FaBuilding, FaMapMarkerAlt, FaCheckCircle, FaExclamationTriangle, FaFlag, FaChevronRight, FaExternalLinkAlt, FaMoneyBillWave } from "react-icons/fa";
+import {
+  FaBuilding,
+  FaMapMarkerAlt,
+  FaCheckCircle,
+  FaExclamationTriangle,
+  FaFlag,
+  FaChevronRight,
+  FaExternalLinkAlt,
+  FaMoneyBillWave,
+} from 'react-icons/fa';
 
 function StatusBadge({ verified }) {
   if (verified) {
@@ -40,7 +49,7 @@ function JobCard({ job, onViewCompany, onReport }) {
         <span className="rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">
           {job.type}
         </span>
-        {job.salary && job.salary.toLowerCase() !== "not disclosed" && (
+        {job.salary && job.salary.toLowerCase() !== 'not disclosed' && (
           <span className="flex items-center gap-1 text-xs font-semibold text-green-700">
             <FaMoneyBillWave size={11} />
             {job.salary}
@@ -52,16 +61,17 @@ function JobCard({ job, onViewCompany, onReport }) {
         <button
           type="button"
           onClick={() => onViewCompany?.(job)}
-          className="flex items-center justify-center gap-1.5 rounded-lg bg-gray-100 px-4 py-2.5 text-sm font-semibold text-gray-800 transition-colors hover:bg-gray-200 focus-ring"
+          className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-gray-100 px-4 py-2.5 text-sm font-semibold text-gray-800 transition-colors hover:bg-gray-200 focus-ring"
         >
-          Company
+          View Company
+          <FaChevronRight size={11} />
         </button>
         {hasApplyUrl ? (
           <a
             href={job.applyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1 rounded-lg bg-[#0F172A] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#020617] focus-ring"
+            className="rounded-lg bg-[#0F172A] px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-700 transition-colors"
           >
             Apply now
             <FaExternalLinkAlt size={10} />
